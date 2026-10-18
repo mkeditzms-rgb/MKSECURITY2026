@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090909">
+  <meta name="description" content="MK APK SECURITY — APK integrity checks, signature guidance, and safe Android app distribution.">
+  <title>MK APK SECURITY | APK Integrity Center</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#home" aria-label="MK APK SECURITY home">
+      <span class="brand-mark" aria-hidden="true">MK</span>
+      <span><strong>MK APK</strong><small>SECURITY</small></span>
+    </a>
+    <button class="menu-toggle" id="menuToggle" aria-expanded="false" aria-controls="mainNav">Menu</button>
+    <nav id="mainNav" class="nav">
+      <a href="#checker">APK Checker</a>
+      <a href="#protection">Protection</a>
+      <a href="#downloads">Downloads</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </header>
+
+  <main id="home">
+    <section class="hero">
+      <div class="eyebrow"><span class="status-dot"></span> ANDROID INTEGRITY CENTER</div>
+      <h1>Protect your APK.<br><span>Verify every build.</span></h1>
+      <p class="hero-copy">A practical home for APK integrity checks, release verification, and safer Android app distribution.</p>
+      <div class="hero-actions">
+        <a class="button button-gold" href="#checker">Check an APK <span aria-hidden="true">↗</span></a>
+        <a class="button button-outline" href="#protection">Protection guide</a>
+      </div>
+      <div class="hero-note"><span aria-hidden="true">◈</span> Your selected APK stays in this browser. This static site does not upload or modify it.</div>
+      <div class="hero-emblem" aria-hidden="true"><div class="emblem-ring"><div class="emblem-shield">✓</div></div><span>INTEGRITY<br>FIRST</span></div>
+    </section>
+
+    <section class="stats" aria-label="Website capabilities">
+      <div><strong>SHA-256</strong><span>File fingerprint</span></div>
+      <div><strong>LOCAL</strong><span>Browser processing</span></div>
+      <div><strong>FREE</strong><span>Static hosting</span></div>
+    </section>
+
+    <section id="checker" class="section">
+      <div class="section-heading">
+        <div><div class="eyebrow">01 / FILE VERIFICATION</div><h2>APK integrity checker</h2></div>
+        <p>Calculate a SHA-256 fingerprint and compare it with a trusted value from the developer.</p>
+      </div>
+      <div class="panel checker-panel">
+        <label class="file-drop" for="apkFile">
+          <span class="upload-icon" aria-hidden="true">↑</span>
+          <strong>Select an APK file</strong>
+          <span id="fileName">Choose a file from your device</span>
+          <input id="apkFile" type="file" accept=".apk,application/vnd.android.package-archive">
+        </label>
+        <div class="field">
+          <label for="trustedHash">Trusted SHA-256 hash (optional)</label>
+          <input id="trustedHash" type="text" spellcheck="false" autocomplete="off" placeholder="Paste the official 64-character SHA-256 hash">
+          <small>Only compare against a hash obtained from a trusted, independent source.</small>
+        </div>
+        <button class="button button-gold full" id="checkButton" type="button">Calculate SHA-256</button>
+        <div id="result" class="result" aria-live="polite">
+          <span class="result-label">RESULT</span>
+          <p>Select an APK and calculate its fingerprint.</p>
+        </div>
+        <div class="hash-row">
+          <code id="hashValue">SHA-256 will appear here</code>
+          <button id="copyHash" class="button button-small button-outline" type="button" disabled>Copy hash</button>
+        </div>
+        <p class="fine-print">This computes a file hash only. It does not scan for malware, validate the APK signature, or prove that an app is safe. Large APKs may use substantial browser memory.</p>
+      </div>
+    </section>
+
+    <section id="protection" class="section">
+      <div class="section-heading">
+        <div><div class="eyebrow">02 / RELEASE HARDENING</div><h2>Protect your Android app</h2></div>
+        <p>Use multiple layers. No single website setting can stop every APK modification or reverse-engineering attempt.</p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature-card"><span class="feature-number">01</span><h3>Keep signing keys private</h3><p>Never publish your keystore, passwords, private keys, or signing credentials in this repository. Back them up securely.</p></article>
+        <article class="feature-card"><span class="feature-number">02</span><h3>Verify release signatures</h3><p>Sign the final APK with your own release key. Verify the signature and compare the signing certificate with your known release identity.</p><a href="https://developer.android.com/tools/apksigner" target="_blank" rel="noopener noreferrer">Android apksigner docs ↗</a></article>
+        <article class="feature-card"><span class="feature-number">03</span><h3>Obfuscate release builds</h3><p>For apps built from source, use R8/code shrinking and obfuscation where appropriate. Obfuscation raises effort; it is not complete protection.</p><a href="https://developer.android.com/build/shrink-code" target="_blank" rel="noopener noreferrer">R8 documentation ↗</a></article>
+        <article class="feature-card"><span class="feature-number">04</span><h3>Check integrity in-app</h3><p>Where appropriate, have the app or backend detect unexpected signing identities and suspicious changes. Client-side checks can be patched by a determined attacker.</p></article>
+        <article class="feature-card"><span class="feature-number">05</span><h3>Keep secrets server-side</h3><p>Do not put API secrets, private tokens, or critical authorization rules inside an APK. Enforce sensitive permissions and decisions on a trusted server.</p></article>
+        <article class="feature-card"><span class="feature-number">06</span><h3>Publish trusted hashes</h3><p>Share the official SHA-256 fingerprint through a trusted channel separate from the APK download. Users can compare it before installing.</p></article>
+      </div>
+      <div class="notice"><strong>Important:</strong> A SHA-256 hash changes if even one file byte changes, but a hash checker does not prevent edits. A modified APK can be resigned with a different key; users need a trusted signature or hash to identify the official release.</div>
+    </section>
+
+    <section id="downloads" class="section">
+      <div class="section-heading">
+        <div><div class="eyebrow">03 / OFFICIAL RELEASE</div><h2>Downloads & release details</h2></div>
+        <p>Add your own APK link and release details after you have built and signed your app.</p>
+      </div>
+      <div class="panel download-panel">
+        <div class="download-icon" aria-hidden="true">APK</div>
+        <div class="download-copy">
+          <h3>Your official APK</h3>
+          <p>Release version: <span class="editable">Not published yet</span></p>
+          <p>SHA-256: <code class="editable">Add your trusted hash</code></p>
+        </div>
+        <!-- Replace # with your real, trusted APK download URL. -->
+        <a class="button button-gold" href="#" id="downloadLink" aria-describedby="downloadHelp">Download APK</a>
+        <p id="downloadHelp" class="fine-print download-help">Demo link is disabled until you add your real APK URL in index.html.</p>
+      </div>
+      <p class="fine-print">GitHub Pages is designed for static websites, not as an APK processing server. Check GitHub's current file-size and usage rules before hosting release binaries. For larger releases, consider GitHub Releases or a trusted distribution service.</p>
+    </section>
+
+    <section id="faq" class="section">
+      <div class="section-heading">
+        <div><div class="eyebrow">04 / KNOW THE LIMITS</div><h2>Frequently asked questions</h2></div>
+      </div>
+      <details><summary>Does this website protect my APK automatically?</summary><p>No. It provides a local SHA-256 checker and security guidance. It does not inject native .so libraries, obfuscate code, encrypt an APK, or add anti-tampering logic.</p></details>
+      <details><summary>Can GitHub Pages run an APK protector?</summary><p>No server-side processing runs on GitHub Pages. A static page can run JavaScript in a visitor's browser, but reliable APK rewriting, signing, and secure key management require a separate trusted build environment or service.</p></details>
+      <details><summary>Is a SHA-256 match proof that an APK is safe?</summary><p>No. A match means the file bytes match the reference hash you trust. It does not establish that the original file is benign or free of vulnerabilities.</p></details>
+      <details><summary>Can I build this on an Android phone?</summary><p>Yes. Use your phone browser to create a GitHub repository and edit index.html and assets/style.css. Desktop mode may make GitHub's editor easier to use.</p></details>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <a class="brand footer-brand" href="#home"><span class="brand-mark">MK</span><span><strong>MK APK</strong><small>SECURITY</small></span></a>
+    <p>Security is a process, not a single button.</p>
+    <small>© <span id="year">2026</span> MK APK SECURITY. Independent project; not affiliated with Google or GitHub.</small>
+  </footer>
+  <script src="assets/app.js"></script>
+</body>
+</html>
